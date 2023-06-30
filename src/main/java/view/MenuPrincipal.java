@@ -1,35 +1,25 @@
 package view;
 
-import java.awt.EventQueue;
+import java.awt.Color;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
 
 import model.vo.UsuarioVO;
 import view.paineis.PainelCadastroEditora;
+import view.paineis.PainelCadastroLivro;
 import view.paineis.PainelCadastroUsuario;
-import view.paineis.PainelEmprestimos;
+import view.paineis.PainelConsultar;
+import view.paineis.PainelEmprestimoConsultar;
 import view.paineis.PainelMeusEmprestimos;
 import view.paineis.PainelSobreSistema;
-import view.paineis.TelaLogin;
-import view.paineis.PainelEmprestimoConsultar;
-import view.paineis.PainelCadastroLivro;
-
-import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.Color;
-import java.awt.Container;
-
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class MenuPrincipal extends JFrame {
 
@@ -57,9 +47,11 @@ public class MenuPrincipal extends JFrame {
 	private PainelCadastroEditora painelCadastroEditora;
 	private PainelCadastroLivro painelCadastroLivro;
 	private PainelMeusEmprestimos painelEmprestimosNovo;
-	private PainelEmprestimos painelEmprestimos;
+	private PainelEmprestimoConsultar painelEmprestimos;
 	private PainelEmprestimoConsultar painelEmprestimoConsultar;
 	private PainelSobreSistema painelSobreSistema;
+	private PainelMeusEmprestimos painelMeusEmprestimos;
+	private PainelConsultar painelConsultar;
 	
 	private UsuarioVO usuarioAutenticado;
 	private JMenuItem mntmConsultar;
@@ -68,11 +60,13 @@ public class MenuPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuPrincipal(UsuarioVO usuario) {
+		setResizable(false);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MenuPrincipal.class.getResource("/icons/iconMenuPrincipalBarra.png")));
 		setTitle("Menu Principal");
 		this.usuarioAutenticado = usuario;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 610, 635);
+		setBounds(100, 100, 610, 682);		
 		setLocationRelativeTo(null);
 		
 		menuBar = new JMenuBar();
@@ -120,9 +114,11 @@ public class MenuPrincipal extends JFrame {
 		
 		mntmMeusEmprestimos = new JMenuItem("Meus Empr\u00E9stimos");
 		mntmMeusEmprestimos.addActionListener(new ActionListener() {
+			
+
 			public void actionPerformed(ActionEvent e) {
-				painelEmprestimos = new PainelEmprestimos();
-				setContentPane(painelEmprestimos);
+				painelMeusEmprestimos = new PainelMeusEmprestimos();
+				setContentPane (painelMeusEmprestimos);
 				revalidate();
 			}
 		});
@@ -142,14 +138,17 @@ public class MenuPrincipal extends JFrame {
 		menuBar.add(mnConsultas);
 		
 		mntmConsultar = new JMenuItem("CONSULTAR");
-		mntmConsultar.addActionListener(new ActionListener() {
+		mntmConsultar.addActionListener(new ActionListener() {			
+
 			public void actionPerformed(ActionEvent e) {
-				//TODO
+				painelConsultar = new PainelConsultar();
+				setContentPane(painelConsultar);
+				revalidate();
 			}
 		});
 		mnConsultas.add(mntmConsultar);
 		
-		mnRelatorios = new JMenu("RELATORIOS");
+		mnRelatorios = new JMenu("RELAT\u00D3RIOS");
 		menuBar.add(mnRelatorios);
 		
 		mntmRelatorioLivrosCadastrados = new JMenuItem("Relat\u00F3rio de Livros Cadastrados");
@@ -210,48 +209,8 @@ public class MenuPrincipal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 		setContentPane(contentPane);
-		contentPane.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,},
-			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,}));
+		contentPane.setLayout(null);
 		
 		//TODO verificar as permissoes do usuario autenticado e mostrar / esconder os componenetes
 	}
-
 }

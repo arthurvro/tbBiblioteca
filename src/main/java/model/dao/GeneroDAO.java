@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.vo.GeneroVO;
 
@@ -42,5 +44,30 @@ public class GeneroDAO {
 		
 		return idGeneroConsultado;
 	}
+
+	public List<GeneroVO> consultarTodosOsGenerosDAO() {
+		List<GeneroVO> generos = new ArrayList<GeneroVO>();
+		Connection conexao = Banco.getConnection();
+		String sql = "SELECT * FROM GENERO";
+		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
+		
+		try {
+			ResultSet resultado = query.executeQuery();
+			while(resultado.next()) {
+				GeneroVO generoConsultado = converterDeResultSetParaEntidade(resultado);
+				generos.add(generoConsultado);
+			}
+		}catch(SQLException e) {
+			System.out.println("Erro ao buscar todos os Generos"
+					+ "\n Causa: " +e.getMessage());
+		} finally {
+			Banco.closePreparedStatement(query);
+			Banco.closeConnection(conexao);
+		}
+		
+		return generos;
+	}
+
+
 
 }

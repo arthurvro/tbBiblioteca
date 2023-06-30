@@ -17,7 +17,7 @@ public class LivroDAO {
 
 	public LivroVO inserirNovoLivroDAO(LivroVO novoLivro) {
 		Connection conn = Banco.getConnection();				
-		System.out.println(novoLivro.getAutor());
+		
 		
 		String sql = "INSERT INTO LIVRO (TITULO, SUBTITULO, EDITORA, ISBN, DTCADASTRO,"
 				+ " AUTOR, ANOPUBLICACAO)"

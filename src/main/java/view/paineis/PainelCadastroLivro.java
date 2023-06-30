@@ -30,7 +30,7 @@ import java.util.Formatter;
 import java.awt.event.ActionEvent;
 
 public class PainelCadastroLivro extends JPanel {
-	private DatePicker dpDataCadastro; //TODO trocar para DatePicker
+	private DatePicker dpDataCadastro; 
 	private JTextField textFieldIsbn;
 	private JTextField textFieldSubtitulo;
 	private JTextField textFieldTitulo;
@@ -144,7 +144,7 @@ public class PainelCadastroLivro extends JPanel {
 				novoLivro.setIsbn(textFieldIsbn.getText());	
 				novoLivro.setAutor(textFieldAutor.getText());
 				novoLivro.setDtCadastro(dpDataCadastro.getDate());
-				//novoLivro.setAnoPublicacao(textFieldAnoPublicacao.getText());
+				novoLivro.setAnoPublicacao(Integer.valueOf(textFieldAnoPublicacao.getText()));
 				novoLivro = livroController.inserirNovoLivroController(novoLivro);				
 			}
 		});

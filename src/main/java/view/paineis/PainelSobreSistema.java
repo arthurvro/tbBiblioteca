@@ -24,7 +24,7 @@ public class PainelSobreSistema extends JPanel {
 		lblNewLabel.setBounds(200, 22, 158, 35);
 		add(lblNewLabel);
 		
-		lblNewLabel_1 = new JLabel("Sisteema na sua vers\u00E3o 1.0");
+		lblNewLabel_1 = new JLabel("Sistema na sua vers\u00E3o 1.0");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblNewLabel_1.setBounds(186, 90, 220, 53);
 		add(lblNewLabel_1);
