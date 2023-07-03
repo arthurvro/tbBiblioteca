@@ -10,7 +10,7 @@ public class EmprestimoVO {
 	private double valorMulta;
 	private String descricao;
 	private UsuarioVO usuarioVO;
-	private ExemplaresVO copiaLivroVO;
+	private ExemplaresVO exemplaresVO;
 	
 	
 	public EmprestimoVO(int idEmprestimo, LocalDate dtEmprestimoInicio, LocalDate dtEmprestimoFim,
@@ -24,7 +24,7 @@ public class EmprestimoVO {
 		this.valorMulta = valorMulta;
 		this.descricao = descricao;
 		this.usuarioVO = usuarioVO;
-		this.copiaLivroVO = copiaLivroVO;
+		this.exemplaresVO = copiaLivroVO;
 	}
 
 	public EmprestimoVO() {
@@ -76,9 +76,9 @@ public class EmprestimoVO {
 		this.usuarioVO = usuarioVO;
 	}
 	public ExemplaresVO getCopiaLivroVO() {
-		return copiaLivroVO;
+		return exemplaresVO;
 	}
 	public void setCopiaLivroVO(ExemplaresVO copiaLivroVO) {
-		this.copiaLivroVO = copiaLivroVO;
+		this.exemplaresVO = copiaLivroVO;
 	}		
 }

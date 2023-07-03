@@ -18,11 +18,11 @@ public class UsuarioController {
 		return usuarioBO.realizarLoginBO(login, senha);
 	}
 
-	public UsuarioVO inserirNovoUsuarioController(UsuarioVO novoUsuario) {
+	public UsuarioVO inserirNovoUsuarioController(UsuarioVO novoUsuario) {		
+		UsuarioBO novoUsuarioBO = new UsuarioBO();
 		
 		
-		
-		return novoUsuario;
+		return novoUsuarioBO.inserirNovoUsuarioBO(novoUsuario);
 	}
 
 	

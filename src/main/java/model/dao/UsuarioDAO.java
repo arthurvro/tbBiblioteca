@@ -1,9 +1,11 @@
 package model.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -32,7 +34,10 @@ public class UsuarioDAO {
 				usuarioVO.setIdUsuario(resultado.getInt("idusuario"));
 				usuarioVO.setLogin(resultado.getString("login"));
 				usuarioVO.setSenha(resultado.getString("senha"));
-				//usuarioVO.setTipoUsuario(TipoUsuarioVO.valueOf(resultado.getString("idtipousuario")));
+				
+				int idTipoUsuario = resultado.getInt("idtipousuario");
+				usuarioVO.setTipoUsuario(TipoUsuarioVO.getTipoUsuarioVOPorValor(idTipoUsuario));
+				
 				usuarioVO.setNome(resultado.getString("nome"));
 				usuarioVO.setCpf(resultado.getString("cpf"));
 				usuarioVO.setTelefone(resultado.getString("telefone"));
@@ -55,6 +60,45 @@ public class UsuarioDAO {
 		}		
 		
 		return usuarioVO;
+	}
+
+	public UsuarioVO inserirNovoUsuarioDAO(UsuarioVO novoUsuario) {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		
+
+		String sql = "INSERT INTO USUARIO (NOME, CPF, TELEFONE, DTCADASTRO, LOGIN, SENHA)"
+				+ "VALUES (?, ?, ?, ?, ?, ?)";
+		PreparedStatement query = Banco.getPreparedStatementWithPk(conn, sql);
+		
+		
+		try {
+			
+			query.setString(1, novoUsuario.getNome());
+			query.setString(2, novoUsuario.getCpf());
+			query.setString(3, novoUsuario.getTelefone());
+			query.setObject(4, java.sql.Date.valueOf(novoUsuario.getDtCadastro()));
+			query.setString(5, novoUsuario.getLogin());
+			query.setString(6, novoUsuario.getSenha());
+			
+			query.execute();
+			ResultSet resultado = query.getGeneratedKeys();
+			
+						
+			if(resultado.next()) {	
+				novoUsuario.setIdUsuario(resultado.getInt(1));				
+			}
+			
+		} catch (SQLException erro){
+			System.out.println("Erro ao inserir novo Usuario.");
+			System.out.println("Erro: " +erro.getMessage());
+			
+		} finally {			
+			Banco.closePreparedStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		
+		return novoUsuario;
 	}
 
 

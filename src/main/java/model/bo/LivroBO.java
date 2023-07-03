@@ -2,24 +2,27 @@ package model.bo;
 
 import java.util.List;
 
+import exception.CamposInvalidosException;
 import model.dao.LivroDAO;
 import model.vo.LivroVO;
 import view.paineis.TelaAlerta;
 
 public class LivroBO {
 	
-	private LivroDAO livroDAO = new LivroDAO();
+	private LivroDAO livroDAO = new LivroDAO();	
 	
-	public LivroVO inserirNovoLivroBO(LivroVO novoLivro) {
+	public LivroVO inserirNovoLivroBO(LivroVO novoLivro) throws CamposInvalidosException{
 		LivroDAO livroDAO = new LivroDAO();
-		if(novoLivro.getTitulo().isBlank()) {
-			TelaAlerta alerta  = new TelaAlerta("Por Favor, preencha os campos corretamente");
-			alerta.setVisible(true);
-			alerta.setModal(true);
+		if(novoLivro.getTitulo().isBlank() || novoLivro.getSubTitulo().isBlank()
+				|| novoLivro.getEditora().isBlank() || novoLivro.getGenero().isBlank() || novoLivro.getIsbn().isBlank()
+				|| novoLivro.getAutor().isBlank() || novoLivro.getDtCadastro() == null
+				|| novoLivro.getAnoPublicacao() == 0) {
+			throw new CamposInvalidosException("Por Favor, preencha todos campos corretamente.");
+		}else {
+			return livroDAO.inserirNovoLivroDAO(novoLivro);				
 		}
-		
-		return livroDAO.inserirNovoLivroDAO(novoLivro);
 	}
+	
 
 	public List<LivroVO> consultarTodosLivros() {
 		

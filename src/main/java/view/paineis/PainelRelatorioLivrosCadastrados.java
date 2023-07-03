@@ -6,8 +6,12 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextArea;
 import javax.swing.JList;
+import javax.swing.JButton;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class PainelRelatorioLivrosCadastrados extends JPanel {
+	private JTable tableLivrosCadastrados;
 
 	/**
 	 * Create the panel.
@@ -16,18 +20,39 @@ public class PainelRelatorioLivrosCadastrados extends JPanel {
 		setBackground(new Color(255, 128, 0));
 		setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Relat\u00F3rio Livros");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel.setBounds(218, 24, 150, 24);
-		add(lblNewLabel);
+		JLabel lblLivrosCadastrados = new JLabel("LIVROS CADASTRADOS");
+		lblLivrosCadastrados.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblLivrosCadastrados.setBounds(257, 21, 233, 24);
+		add(lblLivrosCadastrados);
 		
-		JLabel lblNewLabel_1 = new JLabel("Livros Cadastrados:");
-		lblNewLabel_1.setBounds(65, 89, 109, 24);
-		add(lblNewLabel_1);
+		JButton btnEditar = new JButton("EDITAR");
+		btnEditar.setBounds(46, 328, 89, 23);
+		add(btnEditar);
 		
-		JList list = new JList();
-		list.setBounds(168, 93, 319, 124);
-		add(list);
+		JButton btnExcluir = new JButton("EXCLUIR");
+		btnExcluir.setBounds(385, 328, 89, 23);
+		add(btnExcluir);
+		
+		JButton btnGerarPlanilha = new JButton("GERAR PLANILHA");
+		btnGerarPlanilha.setBounds(538, 328, 137, 23);
+		add(btnGerarPlanilha);
+		
+		tableLivrosCadastrados = new JTable();
+		tableLivrosCadastrados.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null, null, null, null, null, null, null},
+			},
+			new String[] {
+				"New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column"
+			}
+		));
+		tableLivrosCadastrados.setBackground(new Color(0, 221, 221));
+		tableLivrosCadastrados.setBounds(10, 63, 665, 177);
+		add(tableLivrosCadastrados);
+		
+		JButton btnNewButton = new JButton("PESQUISAR");
+		btnNewButton.setBounds(208, 328, 106, 23);
+		add(btnNewButton);
 
 	}
 }

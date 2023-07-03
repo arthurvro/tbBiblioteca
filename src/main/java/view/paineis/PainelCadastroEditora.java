@@ -51,120 +51,145 @@ public class PainelCadastroEditora extends JPanel {
 		setBackground(new Color(255, 128, 0));
 		setLayout(null);
 		
-		lblNewLabel = new JLabel("Cadastro Editora");
+		lblNewLabel = new JLabel("CADASTRO EDITORA");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel.setBounds(182, 30, 168, 28);
+		lblNewLabel.setBounds(259, 29, 222, 28);
 		add(lblNewLabel);
 		
 		lblNomeEditora = new JLabel("Nome Editora:");
-		lblNomeEditora.setBounds(35, 72, 87, 14);
+		lblNomeEditora.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNomeEditora.setBounds(177, 72, 87, 14);
 		add(lblNomeEditora);
 		
 		lblCnpj = new JLabel("CNPJ:");
-		lblCnpj.setBounds(35, 108, 87, 14);
+		lblCnpj.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCnpj.setBounds(177, 108, 87, 14);
 		add(lblCnpj);
 		
 		lblTelefone = new JLabel("Telefone:");
-		lblTelefone.setBounds(35, 141, 87, 14);
+		lblTelefone.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblTelefone.setBounds(177, 141, 87, 14);
 		add(lblTelefone);
 		
 		lblEstado = new JLabel("Estado:");
-		lblEstado.setBounds(35, 287, 87, 14);
+		lblEstado.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblEstado.setBounds(177, 287, 87, 14);
 		add(lblEstado);
 		
 		lblCidade = new JLabel("Cidade:");
-		lblCidade.setBounds(35, 321, 87, 14);
+		lblCidade.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCidade.setBounds(177, 321, 87, 14);
 		add(lblCidade);
 		
 		lblBairro = new JLabel("Bairro:");
-		lblBairro.setBounds(35, 356, 87, 14);
+		lblBairro.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblBairro.setBounds(177, 356, 87, 14);
 		add(lblBairro);
 		
 		lblRua = new JLabel("Rua:");
-		lblRua.setBounds(35, 424, 87, 14);
+		lblRua.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblRua.setBounds(177, 424, 87, 14);
 		add(lblRua);
 		
 		lblNumero = new JLabel("N\u00FAmero:");
-		lblNumero.setBounds(35, 459, 87, 14);
+		lblNumero.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNumero.setBounds(177, 459, 87, 14);
 		add(lblNumero);
 		
 		lblDataCadastro = new JLabel("Data Cadastro:");
-		lblDataCadastro.setBounds(35, 496, 87, 14);
+		lblDataCadastro.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblDataCadastro.setBounds(177, 496, 87, 14);
 		add(lblDataCadastro);
 		
 		lblCep = new JLabel("CEP:");
-		lblCep.setBounds(35, 388, 87, 14);
+		lblCep.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblCep.setBounds(177, 388, 87, 14);
 		add(lblCep);
 		
 		textFieldDataCadastro = new JTextField();
-		textFieldDataCadastro.setBounds(132, 493, 235, 20);
+		textFieldDataCadastro.setBackground(new Color(0, 221, 221));
+		textFieldDataCadastro.setBounds(274, 493, 235, 20);
 		add(textFieldDataCadastro);
 		textFieldDataCadastro.setColumns(10);
 		
 		textFieldNumero = new JTextField();
-		textFieldNumero.setBounds(132, 456, 235, 20);
+		textFieldNumero.setBackground(new Color(0, 221, 221));
+		textFieldNumero.setBounds(274, 456, 235, 20);
 		add(textFieldNumero);
 		textFieldNumero.setColumns(10);
 		
 		textFieldRua = new JTextField();
-		textFieldRua.setBounds(132, 421, 235, 20);
+		textFieldRua.setBackground(new Color(0, 221, 221));
+		textFieldRua.setBounds(274, 421, 235, 20);
 		add(textFieldRua);
 		textFieldRua.setColumns(10);
 		
 		textFieldCep = new JTextField();
-		textFieldCep.setBounds(132, 385, 235, 20);
+		textFieldCep.setBackground(new Color(0, 221, 221));
+		textFieldCep.setBounds(274, 385, 235, 20);
 		add(textFieldCep);
 		textFieldCep.setColumns(10);
 		
 		textFieldBairro = new JTextField();
-		textFieldBairro.setBounds(132, 353, 235, 20);
+		textFieldBairro.setBackground(new Color(0, 221, 221));
+		textFieldBairro.setBounds(274, 353, 235, 20);
 		add(textFieldBairro);
 		textFieldBairro.setColumns(10);
 		
 		textFieldCidade = new JTextField();
-		textFieldCidade.setBounds(132, 318, 235, 20);
+		textFieldCidade.setBackground(new Color(0, 221, 221));
+		textFieldCidade.setBounds(274, 318, 235, 20);
 		add(textFieldCidade);
 		textFieldCidade.setColumns(10);
 		
 		textFieldEstado = new JTextField();
-		textFieldEstado.setBounds(132, 284, 235, 20);
+		textFieldEstado.setBackground(new Color(0, 221, 221));
+		textFieldEstado.setBounds(274, 284, 235, 20);
 		add(textFieldEstado);
 		textFieldEstado.setColumns(10);
 		
 		textFieldTelefone = new JTextField();
-		textFieldTelefone.setBounds(132, 138, 235, 20);
+		textFieldTelefone.setBackground(new Color(0, 221, 221));
+		textFieldTelefone.setBounds(274, 138, 235, 20);
 		add(textFieldTelefone);
 		textFieldTelefone.setColumns(10);
 		
 		textFieldCnpj = new JTextField();
-		textFieldCnpj.setBounds(132, 105, 235, 20);
+		textFieldCnpj.setBackground(new Color(0, 221, 221));
+		textFieldCnpj.setBounds(274, 105, 235, 20);
 		add(textFieldCnpj);
 		textFieldCnpj.setColumns(10);
 		
 		textFieldNomeEditora = new JTextField();
-		textFieldNomeEditora.setBounds(132, 69, 235, 20);
+		textFieldNomeEditora.setBackground(new Color(0, 221, 221));
+		textFieldNomeEditora.setBounds(274, 69, 235, 20);
 		add(textFieldNomeEditora);
 		textFieldNomeEditora.setColumns(10);
 		
 		separator = new JSeparator();
-		separator.setBounds(10, 180, 490, 2);
+		separator.setBackground(new Color(0, 221, 221));
+		separator.setBounds(10, 180, 665, 2);
 		add(separator);
 		
-		lblNewLabel_1 = new JLabel("Endere\u00E7o");
+		lblNewLabel_1 = new JLabel("CADASTRO ENDERE\u00C7O EDITORA");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel_1.setBounds(205, 193, 123, 28);
+		lblNewLabel_1.setBounds(213, 203, 311, 28);
 		add(lblNewLabel_1);
 		
 		lblPais = new JLabel("Pais:");
-		lblPais.setBounds(35, 250, 46, 14);
+		lblPais.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblPais.setBounds(177, 250, 54, 14);
 		add(lblPais);
 		
 		textFieldPais = new JTextField();
-		textFieldPais.setBounds(132, 250, 235, 20);
+		textFieldPais.setBackground(new Color(0, 221, 221));
+		textFieldPais.setBounds(274, 250, 235, 20);
 		add(textFieldPais);
 		textFieldPais.setColumns(10);
 		
 		btnCadastrar = new JButton("CADASTRAR");
+		btnCadastrar.setBackground(new Color(0, 221, 221));
+		btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EditoraController editoraController = new EditoraController();
@@ -177,7 +202,7 @@ public class PainelCadastroEditora extends JPanel {
 				
 			}
 		});
-		btnCadastrar.setBounds(132, 524, 235, 23);
+		btnCadastrar.setBounds(274, 524, 235, 23);
 		add(btnCadastrar);
 
 	}

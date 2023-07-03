@@ -20,7 +20,7 @@ public class GeneroDAO {
 		GeneroVO idGeneroConsultado = null;
 		Connection conexao = Banco.getConnection();
 		String sql =" SELECT * FROM GENERO "
-				+ " WHERE ID = ?";
+				+ " WHERE IDGENERO = ?";
 		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
 		try {
 			query.setInt(1, idGeneroDoLivro);

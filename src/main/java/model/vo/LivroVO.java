@@ -6,28 +6,26 @@ import java.time.LocalDate;
 public class LivroVO {
 	
 	private int idLivro;
-	private int idGenero;
-	private int idEditora;
+	private int anoPublicacao;
 	private String titulo;
 	private String subTitulo;
 	private String editora;
+	private String genero;
 	private String isbn;
-	private LocalDate dtCadastro;
 	private String autor;
-	private int anoPublicacao;
+	private LocalDate dtCadastro;
 	private EditoraVO editoraVO;
-	private GeneroVO generoVO;	
+	private GeneroVO generoVO;
 	
-	public LivroVO(int idLivro, int idGenero, int idEditora, String titulo, String subTitulo, String editora,
-			String isbn, LocalDate dtCadastro, String autor, int anoPublicacao, EditoraVO editoraVO,
-			GeneroVO generoVO) {
+	
+	public LivroVO(int idLivro, String titulo, String subTitulo, String editora, String genero, String isbn,
+			LocalDate dtCadastro, String autor, int anoPublicacao, EditoraVO editoraVO, GeneroVO generoVO) {
 		super();
 		this.idLivro = idLivro;
-		this.idGenero = idGenero;
-		this.idEditora = idEditora;
 		this.titulo = titulo;
 		this.subTitulo = subTitulo;
 		this.editora = editora;
+		this.genero = genero;
 		this.isbn = isbn;
 		this.dtCadastro = dtCadastro;
 		this.autor = autor;
@@ -48,18 +46,6 @@ public class LivroVO {
 	public void setIdLivro(int idLivro) {
 		this.idLivro = idLivro;
 	}
-	public int getIdGenero() {
-		return idGenero;
-	}
-	public void setIdGenero(int idGenero) {
-		this.idGenero = idGenero;
-	}
-	public int getIdEditora() {
-		return idEditora;
-	}
-	public void setIdEditora(int idEditora) {
-		this.idEditora = idEditora;
-	}
 	public String getTitulo() {
 		return titulo;
 	}
@@ -77,6 +63,12 @@ public class LivroVO {
 	}
 	public void setEditora(String editora) {
 		this.editora = editora;
+	}
+	public String getGenero() {
+		return genero;
+	}
+	public void setGenero(String genero) {
+		this.genero = genero;
 	}
 	public String getIsbn() {
 		return isbn;
@@ -113,5 +105,5 @@ public class LivroVO {
 	}
 	public void setGeneroVO(GeneroVO generoVO) {
 		this.generoVO = generoVO;
-	}		
+	}	
 }

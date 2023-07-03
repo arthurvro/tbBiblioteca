@@ -17,6 +17,13 @@ public class UsuarioBO {
 		return usuarioDAO.realizarLoginDAO(login, senha);
 	}
 
+	public UsuarioVO inserirNovoUsuarioBO(UsuarioVO novoUsuario) {
+		UsuarioDAO novoUsuarioDAO = new UsuarioDAO();
+		
+		
+		return novoUsuarioDAO.inserirNovoUsuarioDAO(novoUsuario);
+	}
+
 		
 
 }

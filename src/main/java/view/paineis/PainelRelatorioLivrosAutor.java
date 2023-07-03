@@ -5,8 +5,11 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JList;
+import javax.swing.JTable;
+import javax.swing.JButton;
 
 public class PainelRelatorioLivrosAutor extends JPanel {
+	private JTable tableAutores;
 
 	/**
 	 * Create the panel.
@@ -15,18 +18,27 @@ public class PainelRelatorioLivrosAutor extends JPanel {
 		setBackground(new Color(255, 128, 0));
 		setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Relat\u00F3rio Autor");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel.setBounds(169, 27, 147, 33);
-		add(lblNewLabel);
+		JLabel lblRelatorioAutores = new JLabel("RELAT\u00D3RIO AUTORES");
+		lblRelatorioAutores.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblRelatorioAutores.setBounds(254, 27, 213, 33);
+		add(lblRelatorioAutores);
 		
-		JLabel lblNewLabel_1 = new JLabel("Autores Cadastrados:");
-		lblNewLabel_1.setBounds(52, 90, 117, 14);
-		add(lblNewLabel_1);
+		tableAutores = new JTable();
+		tableAutores.setBackground(new Color(0, 221, 221));
+		tableAutores.setBounds(10, 105, 665, 235);
+		add(tableAutores);
 		
-		JList list = new JList();
-		list.setBounds(181, 89, 274, 124);
-		add(list);
+		JButton btnEditar = new JButton("EDITAR");
+		btnEditar.setBounds(50, 363, 102, 23);
+		add(btnEditar);
+		
+		JButton btnExcluir = new JButton("EXCLUIR");
+		btnExcluir.setBounds(529, 363, 102, 23);
+		add(btnExcluir);
+		
+		JButton btnConsultar = new JButton("CONSULTAR");
+		btnConsultar.setBounds(274, 363, 128, 23);
+		add(btnConsultar);
 
 	}
 

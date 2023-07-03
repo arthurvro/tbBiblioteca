@@ -8,18 +8,32 @@ import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import controller.GeneroController;
 import controller.LivroController;
 import model.dao.GeneroDAO;
+import model.vo.LivroVO;
+
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.awt.event.ActionEvent;
 
 public class PainelConsultar extends JPanel {
 	private JTable tableLivros;
-	private String[] nomesColunas = { "ID", "T�TULO", "SUBT�TULO", "G�NERO", "AUTOR", "DATA LAN�AMENTO" };
+	private String[] nomesColunas = { "ID", "TÃ�TULO", "SUBTÃ�TULO", "GÃŠNERO", "AUTOR", "DATA LANÃ‡AMENTO" };
 	private JComboBox cbConsultarPorGenero;
 	private JTextField textFieldConsultarPorAutor;
 	private JTextField textFieldConsultarPorTitulo;
+	protected List<LivroVO> livros;
+	private JLabel lblNewLabel;
+	private JLabel lblConsultarPorGenero;
+	private JButton btnConsultar;
+	private JLabel lblConsultarPorAutor;
+	private JLabel lblConsultarPorTitulo;
+	private JButton btnSolicitarEmprestimo;
+	
 
 	/**
 	 * Create the panel.
@@ -27,72 +41,99 @@ public class PainelConsultar extends JPanel {
 	public PainelConsultar() {
 		setBackground(new Color(255, 128, 0));
 		setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("CONSULTAR");
+
+		lblNewLabel = new JLabel("CONSULTAR");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel.setBounds(258, 26, 127, 28);
+		lblNewLabel.setBounds(291, 28, 127, 28);
 		add(lblNewLabel);
-		
-		JLabel lblConsultarPorGenero = new JLabel("Consultar por G\u00EAnero: ");
+
+		lblConsultarPorGenero = new JLabel("Consultar por G\u00EAnero: ");
 		lblConsultarPorGenero.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblConsultarPorGenero.setBounds(62, 81, 137, 19);
+		lblConsultarPorGenero.setBounds(163, 81, 137, 19);
 		add(lblConsultarPorGenero);
 		GeneroDAO generoDAO = new GeneroDAO();
 		cbConsultarPorGenero = new JComboBox(generoDAO.consultarTodosOsGenerosDAO().toArray());
+		cbConsultarPorGenero.setBackground(new Color(0, 221, 221));
 		cbConsultarPorGenero.setSelectedIndex(-1);
-		cbConsultarPorGenero.setBounds(214, 79, 171, 21);
+		cbConsultarPorGenero.setBounds(315, 79, 171, 21);
 		add(cbConsultarPorGenero);
-		
+
 		tableLivros = new JTable();
-		tableLivros.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"ID", "T\u00CDTULO", "SUBT\u00CDTULO", "G\u00CANERO", "AUTOR", "DATA LAN\u00C7AMENTO"},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-			},
-			new String[] {
-				"ID", "TITULO", "SUBTITULO", "GENERO", "AUTOR", "DATA LANCAMENTO"
-			}
-		));
-		tableLivros.getColumnModel().getColumn(0).setPreferredWidth(45);
-		tableLivros.getColumnModel().getColumn(1).setPreferredWidth(125);
-		tableLivros.getColumnModel().getColumn(2).setPreferredWidth(138);
-		tableLivros.getColumnModel().getColumn(3).setPreferredWidth(88);
-		tableLivros.getColumnModel().getColumn(4).setPreferredWidth(88);
-		tableLivros.getColumnModel().getColumn(5).setPreferredWidth(108);
-		tableLivros.setBounds(28, 223, 557, 96);
+		tableLivros.setBackground(new Color(0, 221, 221));
+		limparTabela();
+		tableLivros.setBounds(10, 223, 665, 144);
 		add(tableLivros);
-		
-		JButton btnNewButton = new JButton("CONSULTAR");
-		btnNewButton.setBounds(214, 357, 190, 23);
-		add(btnNewButton);
-		
-		JLabel lblConsultarPorAutor = new JLabel("Consultar por Autor:");
+
+		btnConsultar = new JButton("CONSULTAR");
+		btnConsultar.setBackground(new Color(0, 221, 221));
+		btnConsultar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnConsultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LivroController livroController = new LivroController();
+				livros = livroController.consultarTodosLivros();
+				atualizarTabela();
+			}
+		});
+		btnConsultar.setBounds(256, 390, 171, 23);
+		add(btnConsultar);
+
+		lblConsultarPorAutor = new JLabel("Consultar por Autor:");
 		lblConsultarPorAutor.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblConsultarPorAutor.setBounds(62, 119, 137, 14);
+		lblConsultarPorAutor.setBounds(163, 114, 137, 14);
 		add(lblConsultarPorAutor);
-		
+
 		textFieldConsultarPorAutor = new JTextField();
-		textFieldConsultarPorAutor.setBounds(214, 116, 171, 20);
+		textFieldConsultarPorAutor.setBackground(new Color(0, 221, 221));
+		textFieldConsultarPorAutor.setBounds(315, 111, 171, 20);
 		add(textFieldConsultarPorAutor);
 		textFieldConsultarPorAutor.setColumns(10);
-		
-		JLabel lblConsultarPorTitulo = new JLabel("Consultar por T\u00EDtulo:");
+
+		lblConsultarPorTitulo = new JLabel("Consultar por T\u00EDtulo:");
 		lblConsultarPorTitulo.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblConsultarPorTitulo.setBounds(62, 153, 137, 14);
+		lblConsultarPorTitulo.setBounds(163, 153, 137, 14);
 		add(lblConsultarPorTitulo);
-		
+
 		textFieldConsultarPorTitulo = new JTextField();
-		textFieldConsultarPorTitulo.setBounds(214, 147, 171, 20);
+		textFieldConsultarPorTitulo.setBackground(new Color(0, 221, 221));
+		textFieldConsultarPorTitulo.setBounds(315, 147, 171, 20);
 		add(textFieldConsultarPorTitulo);
 		textFieldConsultarPorTitulo.setColumns(10);
-		
-		JButton btnNewButton_1 = new JButton("SOLICITAR EMPR\u00C9STIMO");
-		btnNewButton_1.setBounds(214, 402, 190, 23);
-		add(btnNewButton_1);
 
+		btnSolicitarEmprestimo = new JButton("SOLICITAR EMPR\u00C9STIMO");
+		btnSolicitarEmprestimo.setBackground(new Color(0, 221, 221));
+		btnSolicitarEmprestimo.setFont(new Font("Tahoma", Font.BOLD, 10));
+		btnSolicitarEmprestimo.setBounds(256, 435, 171, 23);
+		add(btnSolicitarEmprestimo);
+
+	}
+
+	protected void atualizarTabela() {
+		this.limparTabela();
+		
+		DefaultTableModel model = (DefaultTableModel) tableLivros.getModel();
+		for(LivroVO livro : livros) {
+			Object[] novaLinhaTabela = new Object[6];
+			//"ID", "TÃ�TULO", "SUBTÃ�TULO", "GÃŠNERO", "AUTOR", "DATA LANÃ‡AMENTO"
+			novaLinhaTabela[0] = livro.getIdLivro();
+			novaLinhaTabela[1] = livro.getTitulo();
+			novaLinhaTabela[2] = livro.getSubTitulo();
+			novaLinhaTabela[3] = livro.getGeneroVO().getGenero();
+			novaLinhaTabela[4] = livro.getAutor();
+			novaLinhaTabela[5] = livro.getDtCadastro();
+			
+			model.addRow(novaLinhaTabela);
+		}
+	}
+
+	private void limparTabela() {
+		tableLivros.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"ID", "TÍTULO", "SUBTÍTULO", "GÊNERO", "AUTOR", "DATA LANÇAMENTO"},
+			},
+			new String[] {
+				"ID", "T\u00CDTULO", "SUBTÃ�TULO", "G\u00CANERO", "AUTOR", "DATA LAN\u00C7AMENTO"
+			}
+		));
+		tableLivros.getColumnModel().getColumn(0).setPreferredWidth(38);
 	}
 }

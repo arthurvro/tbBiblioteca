@@ -46,4 +46,10 @@ public class EnderecoDAO {
 		enderecoBuscado.setNumero(resultado.getString("numero"));		
 		return enderecoBuscado;		
 	}
+	
+	public EnderecoVO inserirNovoEnderecoDAO(EnderecoVO novoEndereco) {
+		
+		return null;
+	}
+	
 }

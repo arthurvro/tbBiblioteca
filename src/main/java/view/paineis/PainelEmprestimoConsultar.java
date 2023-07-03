@@ -8,29 +8,17 @@ import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class PainelEmprestimoConsultar extends JPanel {
+	private JButton btnConsultarTodos;
+	private JLabel lblConsultarEmprestimo;
+	private JTable tableEmprestimo;
+	private JTextField textFieldConsultarPorIdEmprestimo;
+	private JTextField textFieldConsultarPorIdUsuario;
+	private JLabel lblConsultarPorDataEmprestimo;
 	private JTextField textFieldDataEmprestimo;
-	private JTextField textFieldDataDevolucao;
-	private JTextField textFieldIsbn;
-	private JTextField textFieldEditora;
-	private JTextField textFieldLivro;
-	private JTextField textFieldEmail;
-	private JTextField textFieldTelefone;
-	private JTextField textFieldNome;
-	private JSeparator separator;
-	private JButton btnConsultar;
-	private JLabel lblNewLabel;
-	private JLabel lblLivro;
-	private JLabel lblEditora;
-	private JLabel lblIsbn;	
-	private JLabel lblDataEmprestimo;
-	private JLabel lblDataDevolucao;
-	private JLabel lblNewLabel_6;
-	private JLabel lblNome;
-	private JLabel lblTelefone;
-	private JLabel lblEmail;
-	private JTextField textFieldDataDevolvida;
 	
 
 	/**
@@ -40,104 +28,62 @@ public class PainelEmprestimoConsultar extends JPanel {
 		setBackground(new Color(255, 128, 0));
 		setLayout(null);
 		
-		lblNewLabel = new JLabel("Consultar Empr\u00E9stimos");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel.setBounds(157, 26, 217, 38);
-		add(lblNewLabel);
+		lblConsultarEmprestimo = new JLabel("CONSULTAR EMPRÉSTIMO");
+		lblConsultarEmprestimo.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblConsultarEmprestimo.setBounds(231, 24, 248, 38);
+		add(lblConsultarEmprestimo);
 		
-		lblLivro = new JLabel("Livro:");
-		lblLivro.setBounds(39, 88, 46, 14);
-		add(lblLivro);
+		btnConsultarTodos = new JButton("CONSULTAR ");
+		btnConsultarTodos.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnConsultarTodos.setBackground(new Color(0, 221, 221));
+		btnConsultarTodos.setBounds(180, 393, 339, 23);
+		add(btnConsultarTodos);
 		
-		lblEditora = new JLabel("Editora:");
-		lblEditora.setBounds(39, 127, 46, 14);
-		add(lblEditora);
+		tableEmprestimo = new JTable();
+		tableEmprestimo.setBackground(new Color(0, 221, 221));
+		tableEmprestimo.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null, null, null, null},
+			},
+			new String[] {
+				"New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column"
+			}
+		));
+		tableEmprestimo.setBounds(10, 172, 665, 186);
+		add(tableEmprestimo);
 		
-		lblIsbn = new JLabel("ISBN:");
-		lblIsbn.setBounds(39, 168, 46, 14);
-		add(lblIsbn);
+		JLabel lblConsultarPorIdEmprestimo = new JLabel("Consultar por ID_Empr\u00E9stimo:");
+		lblConsultarPorIdEmprestimo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblConsultarPorIdEmprestimo.setBounds(196, 89, 187, 14);
+		add(lblConsultarPorIdEmprestimo);
 		
-		separator = new JSeparator();
-		separator.setBounds(10, 289, 484, 7);
-		add(separator);
+		textFieldConsultarPorIdEmprestimo = new JTextField();
+		textFieldConsultarPorIdEmprestimo.setBackground(new Color(0, 221, 221));
+		textFieldConsultarPorIdEmprestimo.setBounds(393, 86, 112, 20);
+		add(textFieldConsultarPorIdEmprestimo);
+		textFieldConsultarPorIdEmprestimo.setColumns(10);
 		
-		lblDataEmprestimo = new JLabel("Data Empr\u00E9stimo:");
-		lblDataEmprestimo.setBounds(39, 205, 97, 14);
-		add(lblDataEmprestimo);
+		JLabel lblConsultarPorIdUsuario = new JLabel("Consultar por ID_Usu\u00E1rio:");
+		lblConsultarPorIdUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblConsultarPorIdUsuario.setBounds(196, 118, 187, 14);
+		add(lblConsultarPorIdUsuario);
 		
-		lblDataDevolucao = new JLabel("Data Devolu\u00E7\u00E3o:");
-		lblDataDevolucao.setBounds(39, 236, 87, 14);
-		add(lblDataDevolucao);
+		textFieldConsultarPorIdUsuario = new JTextField();
+		textFieldConsultarPorIdUsuario.setBackground(new Color(0, 221, 221));
+		textFieldConsultarPorIdUsuario.setBounds(393, 117, 112, 20);
+		add(textFieldConsultarPorIdUsuario);
+		textFieldConsultarPorIdUsuario.setColumns(10);
+		
+		lblConsultarPorDataEmprestimo = new JLabel("Consultar por Data Empr\u00E9stimo:");
+		lblConsultarPorDataEmprestimo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblConsultarPorDataEmprestimo.setBounds(196, 147, 187, 14);
+		add(lblConsultarPorDataEmprestimo);
 		
 		textFieldDataEmprestimo = new JTextField();
-		textFieldDataEmprestimo.setBounds(143, 202, 328, 20);
+		textFieldDataEmprestimo.setBackground(new Color(0, 221, 221));
+		textFieldDataEmprestimo.setBounds(393, 148, 112, 20);
 		add(textFieldDataEmprestimo);
 		textFieldDataEmprestimo.setColumns(10);
-		
-		textFieldDataDevolucao = new JTextField();
-		textFieldDataDevolucao.setColumns(10);
-		textFieldDataDevolucao.setBounds(143, 230, 328, 20);
-		add(textFieldDataDevolucao);
-		
-		textFieldIsbn = new JTextField();
-		textFieldIsbn.setBounds(143, 165, 328, 20);
-		add(textFieldIsbn);
-		textFieldIsbn.setColumns(10);
-		
-		textFieldEditora = new JTextField();
-		textFieldEditora.setBounds(143, 124, 328, 20);
-		add(textFieldEditora);
-		textFieldEditora.setColumns(10);
-		
-		textFieldLivro = new JTextField();
-		textFieldLivro.setBounds(143, 85, 328, 20);
-		add(textFieldLivro);
-		textFieldLivro.setColumns(10);
-		
-		lblNewLabel_6 = new JLabel("Locat\u00E1rio");
-		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel_6.setBounds(216, 295, 113, 27);
-		add(lblNewLabel_6);
-		
-		lblNome = new JLabel("Nome:");
-		lblNome.setBounds(39, 333, 46, 14);
-		add(lblNome);
-		
-		lblTelefone = new JLabel("Telefone:");
-		lblTelefone.setBounds(39, 372, 46, 14);
-		add(lblTelefone);
-		
-		lblEmail = new JLabel("E-mail:");
-		lblEmail.setBounds(39, 413, 46, 14);
-		add(lblEmail);
-		
-		btnConsultar = new JButton("CONSULTAR");
-		btnConsultar.setBounds(132, 438, 339, 23);
-		add(btnConsultar);
-		
-		textFieldEmail = new JTextField();
-		textFieldEmail.setBounds(132, 410, 339, 20);
-		add(textFieldEmail);
-		textFieldEmail.setColumns(10);
-		
-		textFieldTelefone = new JTextField();
-		textFieldTelefone.setBounds(132, 372, 339, 20);
-		add(textFieldTelefone);
-		textFieldTelefone.setColumns(10);
-		
-		textFieldNome = new JTextField();
-		textFieldNome.setBounds(132, 333, 339, 20);
-		add(textFieldNome);
-		textFieldNome.setColumns(10);
-		
-		JLabel lblDataDevolvida = new JLabel("Data Devolvida:");
-		lblDataDevolvida.setBounds(39, 264, 97, 14);
-		add(lblDataDevolvida);
-		
-		textFieldDataDevolvida = new JTextField();
-		textFieldDataDevolvida.setBounds(143, 261, 328, 20);
-		add(textFieldDataDevolvida);
-		textFieldDataDevolvida.setColumns(10);
 
 	}
 }

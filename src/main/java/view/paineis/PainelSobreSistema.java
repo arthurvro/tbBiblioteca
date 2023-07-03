@@ -21,22 +21,22 @@ public class PainelSobreSistema extends JPanel {
 		
 		lblNewLabel = new JLabel("Sobre o Sistema");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel.setBounds(200, 22, 158, 35);
+		lblNewLabel.setBounds(281, 23, 158, 35);
 		add(lblNewLabel);
 		
 		lblNewLabel_1 = new JLabel("Sistema na sua vers\u00E3o 1.0");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNewLabel_1.setBounds(186, 90, 220, 53);
+		lblNewLabel_1.setBounds(267, 91, 220, 53);
 		add(lblNewLabel_1);
 		
 		lblNewLabel_2 = new JLabel("Desenvolvido por Henrique R. Martins e Arthur V. Ribeiro");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNewLabel_2.setBounds(86, 250, 379, 25);
+		lblNewLabel_2.setBounds(157, 249, 379, 25);
 		add(lblNewLabel_2);
 		
 		lblNewLabel_3 = new JLabel("Com Auxilio do Professor Vilmar C. P. Junior.");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNewLabel_3.setBounds(123, 286, 311, 25);
+		lblNewLabel_3.setBounds(196, 290, 311, 25);
 		add(lblNewLabel_3);
 
 	}
