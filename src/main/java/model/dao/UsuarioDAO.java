@@ -101,6 +101,38 @@ public class UsuarioDAO {
 		return novoUsuario;
 	}
 
+	public UsuarioVO consultarUsuarioPorID(int idusuario) {
+		UsuarioVO idUsuarioConsultado =null;
+		Connection conexao = Banco.getConnection();
+		String sql = "SELECT * FROM USUARIO WHERE IDUSUARIO = ?";
+		
+		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
+		try {
+			query.setInt(1, idusuario);
+			ResultSet resultado = query.executeQuery();
+			if(resultado.next()) {
+				idUsuarioConsultado = converterDeResultSetParaEntidade(resultado);
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao buscar o Usuário por ID com ID: +"+idUsuarioConsultado+" \n Causa: "+e.getMessage());
+						
+		}finally {
+			Banco.closePreparedStatement(query);
+			Banco.closeConnection(conexao);
+			}
+		
+		return idUsuarioConsultado;
+	}
+
+	private UsuarioVO converterDeResultSetParaEntidade(ResultSet resultado) throws SQLException {
+		UsuarioVO idUsuarioConsultado = new UsuarioVO();
+		idUsuarioConsultado.setIdUsuario(resultado.getInt("idusuario"));
+		idUsuarioConsultado.setNome(resultado.getString("nome"));
+		idUsuarioConsultado.setCpf(resultado.getString("cpf"));
+		idUsuarioConsultado.setDtCadastro(resultado.getDate("dtcadastro").toLocalDate());
+		return idUsuarioConsultado;
+	}
+
 
 	
 		

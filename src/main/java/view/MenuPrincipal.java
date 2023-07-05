@@ -63,6 +63,7 @@ public class MenuPrincipal extends JFrame {
 	
 	private UsuarioVO usuarioAutenticado;
 	private JMenuItem mntmConsultar;
+	private JMenuItem mntmRelatorioDeUsuarios;
 	
 	/**
 	 * Create the frame.
@@ -204,7 +205,7 @@ public class MenuPrincipal extends JFrame {
 		});
 		mnRelatorios.add(mntmRelatorioLivrosPorEditora);
 		
-		JMenuItem mntmRelatorioDeUsuarios = new JMenuItem("Relat\u00F3rio de Usu\u00E1rios");
+		mntmRelatorioDeUsuarios = new JMenuItem("Relat\u00F3rio de Usu\u00E1rios");
 		mntmRelatorioDeUsuarios.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {

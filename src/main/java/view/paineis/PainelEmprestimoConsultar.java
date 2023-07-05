@@ -28,7 +28,7 @@ public class PainelEmprestimoConsultar extends JPanel {
 		setBackground(new Color(255, 128, 0));
 		setLayout(null);
 		
-		lblConsultarEmprestimo = new JLabel("CONSULTAR EMPRÉSTIMO");
+		lblConsultarEmprestimo = new JLabel("CONSULTAR EMPRï¿½STIMO");
 		lblConsultarEmprestimo.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblConsultarEmprestimo.setBounds(231, 24, 248, 38);
 		add(lblConsultarEmprestimo);

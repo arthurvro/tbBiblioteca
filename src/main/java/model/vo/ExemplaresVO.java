@@ -1,17 +1,15 @@
 package model.vo;
 
 public class ExemplaresVO {
-	private int idExemplares;
-	private int idLivro;
+	private int idExemplares;	
 	private int registro;
 	private int ativo;
 	private LivroVO livroVO;
 	
-	public ExemplaresVO(int idExemplares, int idLivro, int registro, int ativo, LivroVO livroVO) {
+	public ExemplaresVO(int idExemplares, int registro, int ativo, LivroVO livroVO) {
 	
 		super();
 		this.idExemplares = idExemplares;
-		this.idLivro = idLivro;
 		this.registro = registro;
 		this.ativo = ativo;
 		this.livroVO = livroVO;
@@ -19,7 +17,7 @@ public class ExemplaresVO {
 	
 	public ExemplaresVO() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	
@@ -30,12 +28,8 @@ public class ExemplaresVO {
 	public void setIdExemplares(int idExemplares) {
 		this.idExemplares = idExemplares;
 	}
-	public int getIdLivro() {
-		return idLivro;
-	}
-	public void setIdLivro(int idLivro) {
-		this.idLivro = idLivro;
-	}
+	
+	
 	public int getAtivo() {
 		return ativo;
 	}

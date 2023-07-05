@@ -9,8 +9,21 @@ import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import controller.EmprestimoController;
+import model.vo.EmprestimoVO;
+import model.vo.LivroVO;
+
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.awt.event.ActionEvent;
+
 public class PainelMeusEmprestimos extends JPanel {
-	private JTable table;
+	private JTable tableMeusEmprestimos;
+	private JButton btnConsultar;
+	private JLabel lblMeusEmprestimos;
+	private List<EmprestimoVO> emprestimos;
+	private JButton btnDevolucao;
+	
 
 	/**
 	 * Create the panel.
@@ -19,13 +32,13 @@ public class PainelMeusEmprestimos extends JPanel {
 		setBackground(new Color(255, 128, 0));
 		setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Meus Empr\u00E9stimo");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel.setBounds(274, 25, 165, 30);
-		add(lblNewLabel);
+		lblMeusEmprestimos = new JLabel("Meus Empr\u00E9stimo");
+		lblMeusEmprestimos.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblMeusEmprestimos.setBounds(274, 25, 165, 30);
+		add(lblMeusEmprestimos);
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
+		tableMeusEmprestimos = new JTable();
+		tableMeusEmprestimos.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null, null, null, null, null},
 			},
@@ -33,17 +46,57 @@ public class PainelMeusEmprestimos extends JPanel {
 				"New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column"
 			}
 		));
-		table.setBackground(new Color(0, 221, 221));
-		table.setBounds(20, 141, 650, 151);
-		add(table);
+		tableMeusEmprestimos.setBackground(new Color(0, 221, 221));
+		limparTabela();
+		tableMeusEmprestimos.setBounds(20, 141, 650, 151);
+		add(tableMeusEmprestimos);
 		
-		JButton btnNewButton = new JButton("CONSULTAR");
-		btnNewButton.setBounds(274, 327, 148, 23);
-		add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("DEVOLU\u00C7\u00C3O");
-		btnNewButton_1.setBounds(274, 375, 148, 23);
-		add(btnNewButton_1);
+		btnConsultar = new JButton("CONSULTAR");
+		btnConsultar.addActionListener(new ActionListener() {
 
+			public void actionPerformed(ActionEvent e) {
+				EmprestimoController emprestimoController = new EmprestimoController();
+				emprestimos = emprestimoController.consultarTodosEmprestimos();				
+				atualizarTabela();
+			}
+		});
+		btnConsultar.setBounds(274, 327, 148, 23);
+		add(btnConsultar);
+		
+		btnDevolucao = new JButton("DEVOLU\u00C7\u00C3O");
+		btnDevolucao.setBounds(274, 375, 148, 23);
+		add(btnDevolucao);	
 	}
+	private void limparTabela() {
+		tableMeusEmprestimos.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"ID", "Data Emprestimo", "Data Devolucao", "Data Devolvida", "Valor Multa", "Descricao", "ID Usuario", "ID Exemplar"},
+			},
+			new String[] {
+					"ID", "Data Emprestimo", "Data Devolucao", "Data Devolvida", "Valor Multa", "Descricao", "ID Usuario", "ID Exemplar"
+			}
+		));
+		tableMeusEmprestimos.getColumnModel().getColumn(0).setPreferredWidth(38);
+	}
+	protected void atualizarTabela() {
+		this.limparTabela();
+		
+		DefaultTableModel model = (DefaultTableModel) tableMeusEmprestimos.getModel();
+		for(EmprestimoVO emprestimo : emprestimos) {
+			Object[] novaLinhaTabela = new Object[8];
+			//"ID", "Data Emprestimo", "Data Devolucao", "Data Devolvida", "Valor Multa", "Descricao", "ID Usuario", "ID Exemplar";
+			novaLinhaTabela[0] = emprestimo.getIdEmprestimo();
+			novaLinhaTabela[1] = emprestimo.getDtEmprestimoInicio();
+			novaLinhaTabela[2] = emprestimo.getDtEmprestimoFim();
+			novaLinhaTabela[3] = emprestimo.getDtDevolucao();
+			novaLinhaTabela[4] = emprestimo.getValorMulta();
+			novaLinhaTabela[5] = emprestimo.getDescricao();
+			novaLinhaTabela[6] = emprestimo.getUsuarioVO().getIdUsuario();
+			novaLinhaTabela[7] = emprestimo.getCopiaLivroVO().getIdExemplares();
+			
+			model.addRow(novaLinhaTabela);
+		}
+	}
+
+	
 }
