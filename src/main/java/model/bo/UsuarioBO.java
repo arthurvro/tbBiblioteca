@@ -24,6 +24,4 @@ public class UsuarioBO {
 		return novoUsuarioDAO.inserirNovoUsuarioDAO(novoUsuario);
 	}
 
-		
-
 }

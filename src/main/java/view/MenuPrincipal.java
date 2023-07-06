@@ -47,7 +47,7 @@ public class MenuPrincipal extends JFrame {
 	private JMenuBar menuBar;
 	private JMenuItem mntmConsultarEmprestimo;
 	
-	//Instanciação dos painéis no menu principal
+	//Instanciaï¿½ï¿½o dos painï¿½is no menu principal
 	private PainelCadastroUsuario painelCadastroLeitor;
 	private PainelCadastroEditora painelCadastroEditora;
 	private PainelCadastroLivro painelCadastroLivro;
@@ -84,7 +84,7 @@ public class MenuPrincipal extends JFrame {
 		mnCadastro = new JMenu("CADASTROS");
 		menuBar.add(mnCadastro);
 		
-		mntmCadastrarUsuario = new JMenuItem("Cadastrar Usuário");
+		mntmCadastrarUsuario = new JMenuItem("Cadastrar Usuario");
 		mntmCadastrarUsuario.addActionListener(new ActionListener() {
 			
 
@@ -117,10 +117,10 @@ public class MenuPrincipal extends JFrame {
 		});
 		mnCadastro.add(mntmCadastrarEditora);
 		
-		mnEmprestimos = new JMenu("EMPRÉSTIMOS");
+		mnEmprestimos = new JMenu("EMPRESTIMOS");
 		menuBar.add(mnEmprestimos);
 		
-		mntmMeusEmprestimos = new JMenuItem("Meus Empréstimos");
+		mntmMeusEmprestimos = new JMenuItem("Meus Emprestimos");
 		mntmMeusEmprestimos.addActionListener(new ActionListener() {
 			
 
@@ -132,7 +132,7 @@ public class MenuPrincipal extends JFrame {
 		});
 		mnEmprestimos.add(mntmMeusEmprestimos);
 		
-		mntmConsultarEmprestimo = new JMenuItem("Consultar Empréstimo");
+		mntmConsultarEmprestimo = new JMenuItem("Consultar Emprestimo");
 		mntmConsultarEmprestimo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				painelEmprestimoConsultar = new PainelEmprestimoConsultar();
@@ -156,10 +156,10 @@ public class MenuPrincipal extends JFrame {
 		});
 		mnConsultas.add(mntmConsultar);
 		
-		mnRelatorios = new JMenu("RELATÓRIOS");		
+		mnRelatorios = new JMenu("RELATORIOS");		
 		menuBar.add(mnRelatorios);
 		
-		mntmRelatorioLivrosCadastrados = new JMenuItem("Relatório de Livros Cadastrados");
+		mntmRelatorioLivrosCadastrados = new JMenuItem("Relatorio de Livros Cadastrados");
 		mntmRelatorioLivrosCadastrados.addActionListener(new ActionListener() {
 			
 
@@ -171,7 +171,7 @@ public class MenuPrincipal extends JFrame {
 		});
 		mnRelatorios.add(mntmRelatorioLivrosCadastrados);
 		
-		mntmRelatorioLivrosPorAutor = new JMenuItem("Relatório de Livros por Autor");
+		mntmRelatorioLivrosPorAutor = new JMenuItem("Relatorio de Livros por Autor");
 		mntmRelatorioLivrosPorAutor.addActionListener(new ActionListener() {
 			
 
@@ -183,7 +183,7 @@ public class MenuPrincipal extends JFrame {
 		});
 		mnRelatorios.add(mntmRelatorioLivrosPorAutor);
 		
-		mntmRelatorioLivrosPorGenero = new JMenuItem("Relatório de Livros por Gênero");
+		mntmRelatorioLivrosPorGenero = new JMenuItem("Relatorio de Livros por Genero");
 		mntmRelatorioLivrosPorGenero.addActionListener(new ActionListener() {
 			
 
@@ -195,7 +195,7 @@ public class MenuPrincipal extends JFrame {
 		});
 		mnRelatorios.add(mntmRelatorioLivrosPorGenero);
 		
-		mntmRelatorioLivrosPorEditora = new JMenuItem("Relatório de Livros por Editora");
+		mntmRelatorioLivrosPorEditora = new JMenuItem("Relatorio de Livros por Editora");
 		mntmRelatorioLivrosPorEditora.addActionListener(new ActionListener() {			
 
 			public void actionPerformed(ActionEvent e) {
@@ -206,7 +206,7 @@ public class MenuPrincipal extends JFrame {
 		mnRelatorios.add(mntmRelatorioLivrosPorEditora);
 		
 		mntmRelatorioDeUsuarios = new JMenuItem("Relat\u00F3rio de Usu\u00E1rios");
-		mntmRelatorioDeUsuarios.addActionListener(new ActionListener() {
+		mntmRelatorioDeUsuarios.addActionListener(new ActionListener() {	
 			
 			public void actionPerformed(ActionEvent e) {
 				painelRelatorioUsuarios = new PainelRelatorioUsuarios();

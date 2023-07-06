@@ -228,7 +228,7 @@ public class PainelCadastroUsuario extends JPanel {
 			}
 		});
 		rdbtnAdministrador.setBackground(new Color(0, 221, 221));
-		rdbtnAdministrador.setBounds(313, 257, 125, 23);
+		rdbtnAdministrador.setBounds(305, 255, 141, 23);
 		add(rdbtnAdministrador);
 		
 		JButton btnCadastrar = new JButton("CADASTRAR");

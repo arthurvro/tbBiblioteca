@@ -128,7 +128,7 @@ public class PainelConsultar extends JPanel {
 	private void limparTabela() {
 		tableLivros.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"ID", "TÍTULO", "SUBTÍTULO", "GÊNERO", "AUTOR", "DATA LANÇAMENTO"},
+				{"ID", "TÍTULO", "SUBTÍTULO", "GÊNERO", "AUTOR", "DATA CADASTRO"},
 			},
 			new String[] {
 				"ID", "T\u00CDTULO", "SUBTÃ�TULO", "G\u00CANERO", "AUTOR", "DATA LAN\u00C7AMENTO"

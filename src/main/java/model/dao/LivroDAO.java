@@ -38,8 +38,9 @@ public class LivroDAO {
 				ResultSet resultado = query.getGeneratedKeys();
 				
 				if(resultado.next()) {
-					//TODO REVISAR
+					
 					novoLivro.setIdLivro(resultado.getInt(1));
+					
 					//novoLivro.setIdEditora(resultado.getInt(1));
 				}
 		
