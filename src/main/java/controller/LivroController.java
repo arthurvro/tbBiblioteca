@@ -19,4 +19,9 @@ public class LivroController {
 		return livroBO.consultarTodosLivros();
 	}
 
+	public List<LivroVO> consultarLivroPorAutor(String nomeAutor) {
+		
+		return livroBO.consultarLivroPorAutor(nomeAutor);
+	}
+
 }

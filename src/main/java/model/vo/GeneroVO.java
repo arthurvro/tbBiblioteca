@@ -13,7 +13,6 @@ public class GeneroVO {
 
 	public GeneroVO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	

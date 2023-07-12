@@ -7,18 +7,23 @@ import java.awt.Component;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
 import com.github.lgooddatepicker.components.DatePicker;
 
+import controller.EnderecoController;
 import controller.UsuarioController;
+import exception.CamposInvalidosException;
 import model.vo.EnderecoVO;
 import model.vo.TipoUsuarioVO;
 import model.vo.UsuarioVO;
 
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JSeparator;
 import javax.swing.JRadioButton;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.awt.event.ActionEvent;
 
@@ -53,11 +58,16 @@ public class PainelCadastroUsuario extends JPanel {
 	private Component lblNumero;
 	private JLabel lblPais;
 	private JSeparator separator;
-
+	private MaskFormatter mascaraCpf;
+	private MaskFormatter mascaraTelefone;
+	private MaskFormatter mascaraCep;
+	private JRadioButton rdbtnAdministrador;
+	TipoUsuarioVO adm = null;
 	/**
 	 * Create the panel.
+	 * @throws ParseException 
 	 */
-	public PainelCadastroUsuario() {
+	public PainelCadastroUsuario() throws ParseException {
 		setBackground(new Color(255, 128, 0));
 		setForeground(new Color(128, 128, 64));
 		setLayout(null);
@@ -114,14 +124,19 @@ public class PainelCadastroUsuario extends JPanel {
 		textFieldSenha.setBounds(272, 228, 204, 20);
 		add(textFieldSenha);
 		textFieldSenha.setColumns(10);
-
-		textFieldTelefone = new JTextField();
+		
+		mascaraTelefone = new MaskFormatter("(##)#####-####");
+		mascaraTelefone.setValueContainsLiteralCharacters(false);
+		textFieldTelefone = new JFormattedTextField(mascaraTelefone);
 		textFieldTelefone.setBackground(new Color(0, 221, 221));
 		textFieldTelefone.setBounds(272, 133, 204, 20);
 		add(textFieldTelefone);
 		textFieldTelefone.setColumns(10);
-
-		textFieldCpf = new JTextField();
+		
+		
+		mascaraCpf = new MaskFormatter("###.###.###-##");
+		mascaraCpf.setValueContainsLiteralCharacters(false);
+		textFieldCpf = new JFormattedTextField(mascaraCpf);
 		textFieldCpf.setBackground(new Color(0, 221, 221));
 		textFieldCpf.setBounds(272, 100, 204, 20);
 		add(textFieldCpf);
@@ -190,7 +205,9 @@ public class PainelCadastroUsuario extends JPanel {
 		add(textFieldBairro);
 		textFieldBairro.setColumns(10);
 		
-		textFieldCep = new JTextField();
+		mascaraCep = new MaskFormatter("#####-###");
+		mascaraCep.setValueContainsLiteralCharacters(false);
+		textFieldCep = new JFormattedTextField(mascaraCep);
 		textFieldCep.setBackground(new Color(0, 221, 221));
 		textFieldCep.setBounds(272, 475, 203, 20);
 		add(textFieldCep);
@@ -219,16 +236,21 @@ public class PainelCadastroUsuario extends JPanel {
 		add(textFieldPais);
 		textFieldPais.setColumns(10);
 		
-		JRadioButton rdbtnAdministrador = new JRadioButton("ADMINISTRADOR");
+		rdbtnAdministrador = new JRadioButton("ADMINISTRADOR");
 		rdbtnAdministrador.setFont(new Font("Tahoma", Font.BOLD, 11));
 		rdbtnAdministrador.setForeground(new Color(64, 0, 0));
+		
 		rdbtnAdministrador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				if(rdbtnAdministrador.isSelected()) {
+					adm = TipoUsuarioVO.getTipoUsuarioVOPorValor(1);
+				}else {
+					adm=TipoUsuarioVO.getTipoUsuarioVOPorValor(2);
+				}				
 			}
 		});
 		rdbtnAdministrador.setBackground(new Color(0, 221, 221));
-		rdbtnAdministrador.setBounds(305, 255, 141, 23);
+		rdbtnAdministrador.setBounds(313, 257, 125, 23);
 		add(rdbtnAdministrador);
 		
 		JButton btnCadastrar = new JButton("CADASTRAR");
@@ -237,23 +259,46 @@ public class PainelCadastroUsuario extends JPanel {
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UsuarioController usuarioController = new UsuarioController();
+				EnderecoController enderecoController = new EnderecoController();
 				UsuarioVO novoUsuario = new UsuarioVO();
-				int valor = 0;
+				EnderecoVO novoEndereco = new EnderecoVO();
+				
+				String cpfSemMascara = textFieldCpf.getText()
+						.replace(".", "").replace("-", "");
+				String telefoneSemMascara = textFieldTelefone.getText()
+						.replace("(", "").replace("-", "").replace(")", "");
+				String cepSemMascara = textFieldCep.getText().replace("-", "");
+				
 				novoUsuario.setNome(textFieldNome.getText());
-				novoUsuario.setCpf(textFieldCpf.getText());
-				novoUsuario.setTelefone(textFieldTelefone.getText());
+				novoUsuario.setCpf(cpfSemMascara);
+
+				TipoUsuarioVO tipoUsuarioVO = adm;
+				novoUsuario.setTipoUsuario(tipoUsuarioVO);
+				novoUsuario.setTelefone(telefoneSemMascara);
 				novoUsuario.setDtCadastro(dataCadastro.getDate());
 				novoUsuario.setLogin(textFieldLogin.getText());
 				novoUsuario.setSenha(textFieldSenha.getText());
-				/*if(rdbtnAdministrador.isSelected()) {
-					valor =2;
-					novoUsuario.setIdUsuario(valor);
-				} */
-				novoUsuario = usuarioController.inserirNovoUsuarioController(novoUsuario);
+				
+				novoEndereco.setPais(textFieldPais.getText());
+				novoEndereco.setEstado(textFieldEstado.getText());
+				novoEndereco.setCidade(textFieldCidade.getText());
+				novoEndereco.setBairro(textFieldBairro.getText());
+				novoEndereco.setCep(cepSemMascara);
+				novoEndereco.setRua(textFieldRua.getText());
+				novoEndereco.setNumero(textFieldNumero.getText());
+				
+				novoUsuario.setEnderecoVO(novoEndereco);
 				
 				
 				
-				
+				try {
+					novoUsuario = usuarioController.inserirNovoUsuarioController(novoUsuario);
+				} catch (CamposInvalidosException e1) {
+					TelaAlerta alerta = new TelaAlerta("erro: " +e1.getMessage());
+					alerta.setVisible(true);
+				}
+				TelaAlerta alerta = new TelaAlerta("USUARIO CADASTRADO COM SUCESSO.");
+				alerta.setVisible(true);
 			}
 		});
 		btnCadastrar.setBounds(272, 584, 204, 23);

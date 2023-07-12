@@ -7,13 +7,16 @@ import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
 import controller.EditoraController;
 import model.vo.EditoraVO;
 
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.awt.event.ActionEvent;
 
 public class PainelCadastroEditora extends JPanel {
@@ -43,11 +46,15 @@ public class PainelCadastroEditora extends JPanel {
 	private JLabel lblPais;	
 	private JSeparator separator;
 	private JButton btnCadastrar;
+	private MaskFormatter mascaraCnpj;
+	private MaskFormatter mascaraTelefone;
+	private MaskFormatter mascaraCep;
 
 	/**
 	 * Create the panel.
+	 * @throws ParseException 
 	 */
-	public PainelCadastroEditora() {
+	public PainelCadastroEditora() throws ParseException {
 		setBackground(new Color(255, 128, 0));
 		setLayout(null);
 		
@@ -112,7 +119,7 @@ public class PainelCadastroEditora extends JPanel {
 		add(textFieldDataCadastro);
 		textFieldDataCadastro.setColumns(10);
 		
-		textFieldNumero = new JTextField();
+		textFieldNumero = new JFormattedTextField();
 		textFieldNumero.setBackground(new Color(0, 221, 221));
 		textFieldNumero.setBounds(274, 456, 235, 20);
 		add(textFieldNumero);
@@ -124,7 +131,17 @@ public class PainelCadastroEditora extends JPanel {
 		add(textFieldRua);
 		textFieldRua.setColumns(10);
 		
-		textFieldCep = new JTextField();
+//		mascaraCpf = new MaskFormatter("###.###.###-##");
+//		mascaraCpf.setValueContainsLiteralCharacters(false);
+//		
+//		txtCpf = new JFormattedTextField(mascaraCpf);
+//		txtCpf.setBounds(85, 60, 300, 20);
+//		frmNovoCliente.getContentPane().add(txtCpf);
+		
+		mascaraCep = new MaskFormatter("#####-###");
+		mascaraCep.setValueContainsLiteralCharacters(false);
+		
+		textFieldCep = new JFormattedTextField(mascaraCep);
 		textFieldCep.setBackground(new Color(0, 221, 221));
 		textFieldCep.setBounds(274, 385, 235, 20);
 		add(textFieldCep);
@@ -148,13 +165,19 @@ public class PainelCadastroEditora extends JPanel {
 		add(textFieldEstado);
 		textFieldEstado.setColumns(10);
 		
-		textFieldTelefone = new JTextField();
+		mascaraTelefone = new MaskFormatter("(##)#####-####");
+		mascaraTelefone.setValueContainsLiteralCharacters(false);
+		
+		textFieldTelefone = new JFormattedTextField(mascaraTelefone);
 		textFieldTelefone.setBackground(new Color(0, 221, 221));
 		textFieldTelefone.setBounds(274, 138, 235, 20);
 		add(textFieldTelefone);
 		textFieldTelefone.setColumns(10);
 		
-		textFieldCnpj = new JTextField();
+		mascaraCnpj = new MaskFormatter("##.###.###/####-##");
+		mascaraCnpj.setValueContainsLiteralCharacters(false);
+		
+		textFieldCnpj = new JFormattedTextField(mascaraCnpj);
 		textFieldCnpj.setBackground(new Color(0, 221, 221));
 		textFieldCnpj.setBounds(274, 105, 235, 20);
 		add(textFieldCnpj);

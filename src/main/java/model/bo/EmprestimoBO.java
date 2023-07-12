@@ -13,4 +13,9 @@ public class EmprestimoBO {
 		return emprestimoDAO.consultarTodosEmprestimos();
 	}
 
+	public EmprestimoVO consultarEmprestimoPorIdEmprestimo(int idEmprestimoConvertido) {
+
+		return emprestimoDAO.consultarEmprestimoPorIdEmprestimo(idEmprestimoConvertido);
+	}
+
 }

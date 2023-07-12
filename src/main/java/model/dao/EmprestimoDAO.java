@@ -85,7 +85,7 @@ public class EmprestimoDAO {
 		EmprestimoVO idEmprestimoConsultado = new EmprestimoVO();
 		idEmprestimoConsultado.setIdEmprestimo(resultado.getInt("idemprestimo"));
 		idEmprestimoConsultado.setCopiaLivroVO(null);
-		idEmprestimoConsultado.setUsuarioVO(resultado);
+		idEmprestimoConsultado.setUsuarioVO(null);
 		idEmprestimoConsultado.setDescricao(resultado.getString("descricao"));
 		idEmprestimoConsultado.setDtEmprestimoInicio(resultado.getDate("dtemprestimoinicio").toLocalDate());
 		idEmprestimoConsultado.setDtEmprestimoFim(resultado.getDate("dtemprestimofim").toLocalDate());

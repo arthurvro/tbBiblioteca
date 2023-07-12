@@ -37,7 +37,7 @@ public class TelaAlerta extends JDialog {
 	 * Create the dialog.
 	 */
 	public TelaAlerta(String mensagem) {
-		setTitle("Aten\u00E7\u00E3o!");
+		setTitle("ATEN«√O !");
 		
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -50,17 +50,19 @@ public class TelaAlerta extends JDialog {
 		setLocationRelativeTo(null);
 		
 		lblAlerta = new JLabel(mensagem);
-		lblAlerta.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblAlerta.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
 		lblAlerta.setBounds(10, 101, 414, 77);
 		contentPanel.add(lblAlerta);
 		
 		btnNewButton = new JButton("OK");
+		btnNewButton.setBackground(new Color(0, 221, 221));
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaAlerta.this.dispose();
 			}
 		});
-		btnNewButton.setBounds(166, 215, 89, 23);
+		btnNewButton.setBounds(174, 214, 89, 23);
 		contentPanel.add(btnNewButton);
 		
 		JLabel lblIconAlerta = new JLabel("New label");
@@ -68,9 +70,9 @@ public class TelaAlerta extends JDialog {
 		lblIconAlerta.setBounds(190, 11, 65, 52);
 		contentPanel.add(lblIconAlerta);
 		
-		JLabel lblNewLabel = new JLabel("Aten√ß√£o!");
+		JLabel lblNewLabel = new JLabel("ATEN«√O !");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel.setBounds(184, 77, 108, 34);
+		lblNewLabel.setBounds(174, 74, 108, 34);
 		contentPanel.add(lblNewLabel);
 	}
 }

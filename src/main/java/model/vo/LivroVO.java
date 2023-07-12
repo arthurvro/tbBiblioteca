@@ -9,37 +9,80 @@ public class LivroVO {
 	private int anoPublicacao;
 	private String titulo;
 	private String subTitulo;
-	private String editora;
-	private String genero;
 	private String isbn;
 	private String autor;
+	private String editora;
+	private String genero;
+	private int qtdLivros;
+	private int qtdDisponivel;
 	private LocalDate dtCadastro;
 	private EditoraVO editoraVO;
 	private GeneroVO generoVO;
 	
 	
-	public LivroVO(int idLivro, String titulo, String subTitulo, String editora, String genero, String isbn,
-			LocalDate dtCadastro, String autor, int anoPublicacao, EditoraVO editoraVO, GeneroVO generoVO) {
+
+	
+	public LivroVO(int idLivro, int anoPublicacao, String titulo, String subTitulo,	String isbn, String autor, String editora, String genero, int qtdLivros, int qtdDisponivel, LocalDate dtCadastro, EditoraVO editoraVO,
+			GeneroVO generoVO) {
 		super();
 		this.idLivro = idLivro;
+		this.anoPublicacao = anoPublicacao;
 		this.titulo = titulo;
 		this.subTitulo = subTitulo;
+		this.isbn = isbn;
+		this.autor = autor;
 		this.editora = editora;
 		this.genero = genero;
-		this.isbn = isbn;
+		this.qtdLivros = qtdLivros;
+		this.qtdDisponivel = qtdDisponivel;
 		this.dtCadastro = dtCadastro;
-		this.autor = autor;
-		this.anoPublicacao = anoPublicacao;
 		this.editoraVO = editoraVO;
 		this.generoVO = generoVO;
 	}
-	
+
+
+	public String getGenero() {
+		return genero;
+	}
+
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
+
 	public LivroVO() {
 		super();
 		// TODO Auto-generated constructor stub
+	}	
+	
+	
+	public String getEditora() {
+		return editora;
 	}
-	
-	
+
+
+	public void setEditora(String editora) {
+		this.editora = editora;
+	}
+
+
+	public int getQtdLivros() {
+		return qtdLivros;
+	}
+
+	public void setQtdLivros(int qtdLivros) {
+		this.qtdLivros = qtdLivros;
+	}
+
+	public int getQtdDisponivel() {
+		return qtdDisponivel;
+	}
+
+	public void setQtdDisponivel(int qtdDisponivel) {
+		this.qtdDisponivel = qtdDisponivel;
+	}
+
 	public int getIdLivro() {
 		return idLivro;
 	}
@@ -57,18 +100,6 @@ public class LivroVO {
 	}
 	public void setSubTitulo(String subTitulo) {
 		this.subTitulo = subTitulo;
-	}
-	public String getEditora() {
-		return editora;
-	}
-	public void setEditora(String editora) {
-		this.editora = editora;
-	}
-	public String getGenero() {
-		return genero;
-	}
-	public void setGenero(String genero) {
-		this.genero = genero;
 	}
 	public String getIsbn() {
 		return isbn;

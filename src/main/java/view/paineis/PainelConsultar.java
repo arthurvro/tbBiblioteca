@@ -19,6 +19,8 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PainelConsultar extends JPanel {
 	private JTable tableLivros;
@@ -33,6 +35,7 @@ public class PainelConsultar extends JPanel {
 	private JLabel lblConsultarPorAutor;
 	private JLabel lblConsultarPorTitulo;
 	private JButton btnSolicitarEmprestimo;
+	private JButton btnNewButton;
 	
 
 	/**
@@ -59,6 +62,11 @@ public class PainelConsultar extends JPanel {
 		add(cbConsultarPorGenero);
 
 		tableLivros = new JTable();
+		tableLivros.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
 		tableLivros.setBackground(new Color(0, 221, 221));
 		limparTabela();
 		tableLivros.setBounds(10, 223, 665, 144);
@@ -69,9 +77,16 @@ public class PainelConsultar extends JPanel {
 		btnConsultar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LivroController livroController = new LivroController();
-				livros = livroController.consultarTodosLivros();
-				atualizarTabela();
+				
+				//if(textFieldConsultarPorAutor.getText().isBlank() && textFieldConsultarPorTitulo.getText().isBlank() && cbConsultarPorGenero == null) {
+					LivroController livroController = new LivroController();
+					livros = livroController.consultarTodosLivros();
+					atualizarTabela();
+				//}
+//				String nomeAutor = textFieldConsultarPorAutor.getText();
+//				LivroController livroController = new LivroController();
+//				livros = livroController.consultarLivroPorAutor(nomeAutor);
+//				atualizarTabela();
 			}
 		});
 		btnConsultar.setBounds(256, 390, 171, 23);
@@ -100,10 +115,39 @@ public class PainelConsultar extends JPanel {
 		textFieldConsultarPorTitulo.setColumns(10);
 
 		btnSolicitarEmprestimo = new JButton("SOLICITAR EMPR\u00C9STIMO");
+		btnSolicitarEmprestimo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//TODO
+			}
+		});
 		btnSolicitarEmprestimo.setBackground(new Color(0, 221, 221));
 		btnSolicitarEmprestimo.setFont(new Font("Tahoma", Font.BOLD, 10));
 		btnSolicitarEmprestimo.setBounds(256, 435, 171, 23);
 		add(btnSolicitarEmprestimo);
+		
+		btnNewButton = new JButton("LIMPAR TABELA");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				this.limparTabela();
+			}
+
+			private void limparTabela() {
+				tableLivros.setModel(new DefaultTableModel(
+						new Object[][] {
+							{"ID", "TÍTULO", "SUBTÍTULO", "GÊNERO", "AUTOR", "DATA LANÇAMENTO"},
+						},
+						new String[] {
+								"ID", "TÍTULO", "SUBTÍTULO", "GÊNERO", "AUTOR", "DATA LANÇAMENTO"
+						}
+					));
+					tableLivros.getColumnModel().getColumn(0).setPreferredWidth(10);				
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNewButton.setBackground(new Color(0, 221, 221));
+		btnNewButton.setBounds(256, 474, 171, 23);
+		add(btnNewButton);
 
 	}
 
@@ -113,7 +157,7 @@ public class PainelConsultar extends JPanel {
 		DefaultTableModel model = (DefaultTableModel) tableLivros.getModel();
 		for(LivroVO livro : livros) {
 			Object[] novaLinhaTabela = new Object[6];
-			//"ID", "TÃ�TULO", "SUBTÃ�TULO", "GÃŠNERO", "AUTOR", "DATA LANÃ‡AMENTO"
+			//"ID", "TÍTULO", "SUBTÍTULO", "GÊNERO", "AUTOR", "DATA LANÇAMENTO"
 			novaLinhaTabela[0] = livro.getIdLivro();
 			novaLinhaTabela[1] = livro.getTitulo();
 			novaLinhaTabela[2] = livro.getSubTitulo();
@@ -128,12 +172,12 @@ public class PainelConsultar extends JPanel {
 	private void limparTabela() {
 		tableLivros.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"ID", "TÍTULO", "SUBTÍTULO", "GÊNERO", "AUTOR", "DATA CADASTRO"},
+				{"ID", "TÍTULO", "SUBTÍTULO", "GÊNERO", "AUTOR", "DATA LANÇAMENTO"},
 			},
 			new String[] {
-				"ID", "T\u00CDTULO", "SUBTÃ�TULO", "G\u00CANERO", "AUTOR", "DATA LAN\u00C7AMENTO"
+					"ID", "TÍTULO", "SUBTÍTULO", "GÊNERO", "AUTOR", "DATA LANÇAMENTO"
 			}
 		));
-		tableLivros.getColumnModel().getColumn(0).setPreferredWidth(38);
+		tableLivros.getColumnModel().getColumn(0).setPreferredWidth(10);
 	}
 }

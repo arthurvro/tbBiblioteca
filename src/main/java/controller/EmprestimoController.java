@@ -12,4 +12,10 @@ public class EmprestimoController {
 		return emprestimoBO.consultarTodosEmprestimos();
 	}
 
+	public EmprestimoVO consultarEmprestimosPorIdEmprestimo(int idEmprestimoConvertido) {
+		
+
+		return emprestimoBO.consultarEmprestimoPorIdEmprestimo(idEmprestimoConvertido);
+	}
+
 }

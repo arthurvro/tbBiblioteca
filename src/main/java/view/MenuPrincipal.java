@@ -25,6 +25,9 @@ import view.paineis.PainelRelatorioLivrosEditora;
 import view.paineis.PainelRelatorioLivrosGenero;
 import view.paineis.PainelRelatorioUsuarios;
 import view.paineis.PainelSobreSistema;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.text.ParseException;
 
 public class MenuPrincipal extends JFrame {
 
@@ -46,8 +49,8 @@ public class MenuPrincipal extends JFrame {
 	private JMenuItem mntmSair;
 	private JMenuBar menuBar;
 	private JMenuItem mntmConsultarEmprestimo;
-	
-	//Instanciaï¿½ï¿½o dos painï¿½is no menu principal
+
+	// Instanciação dos painéis no menu principal
 	private PainelCadastroUsuario painelCadastroLeitor;
 	private PainelCadastroEditora painelCadastroEditora;
 	private PainelCadastroLivro painelCadastroLivro;
@@ -60,79 +63,99 @@ public class MenuPrincipal extends JFrame {
 	private PainelRelatorioLivrosGenero painelRelatorioLivrosGenero;
 	private PainelRelatorioLivrosEditora painelRelatorioLivrosEditora;
 	private PainelRelatorioUsuarios painelRelatorioUsuarios;
-	
+
 	private UsuarioVO usuarioAutenticado;
 	private JMenuItem mntmConsultar;
 	private JMenuItem mntmRelatorioDeUsuarios;
-	
+
 	/**
 	 * Create the frame.
 	 */
 	public MenuPrincipal(UsuarioVO usuario) {
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(MenuPrincipal.class.getResource("/icons/iconMenuPrincipalBarra.png")));
+		setIconImage(Toolkit.getDefaultToolkit()
+				.getImage(MenuPrincipal.class.getResource("/icons/iconMenuPrincipalBarra.png")));
 		setTitle("Menu Principal - Bem-vindo, " + usuario.getNome() + " (" + usuario.getTipoUsuario().toString() + ")");
 		this.usuarioAutenticado = usuario;
-		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 700, 682);		
+		setBounds(100, 100, 700, 682);
 		setLocationRelativeTo(null);
-		
+
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-		
+
 		mnCadastro = new JMenu("CADASTROS");
+		mnCadastro.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+
+			}
+		});
 		menuBar.add(mnCadastro);
-		
-		mntmCadastrarUsuario = new JMenuItem("Cadastrar Usuario");
+
+		mntmCadastrarUsuario = new JMenuItem("Cadastrar Usuário");
 		mntmCadastrarUsuario.addActionListener(new ActionListener() {
-			
 
 			public void actionPerformed(ActionEvent e) {
-				painelCadastroLeitor = new PainelCadastroUsuario();
+				try {
+					painelCadastroLeitor = new PainelCadastroUsuario();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				setContentPane(painelCadastroLeitor);
 				revalidate();
 			}
 		});
 		mnCadastro.add(mntmCadastrarUsuario);
-		
+
 		mntmCadastrarLivros = new JMenuItem("Cadastrar Livros");
 		mntmCadastrarLivros.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				painelCadastroLivro = new PainelCadastroLivro();
+				try {
+					painelCadastroLivro = new PainelCadastroLivro();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				setContentPane(painelCadastroLivro);
 				revalidate();
 			}
 		});
-		
+
 		mnCadastro.add(mntmCadastrarLivros);
-		
+
 		mntmCadastrarEditora = new JMenuItem("Cadastrar Editora");
 		mntmCadastrarEditora.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				painelCadastroEditora = new PainelCadastroEditora();
+				try {
+					painelCadastroEditora = new PainelCadastroEditora();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				setContentPane(painelCadastroEditora);
 				revalidate();
 			}
 		});
 		mnCadastro.add(mntmCadastrarEditora);
-		
-		mnEmprestimos = new JMenu("EMPRESTIMOS");
+
+		mnEmprestimos = new JMenu("EMPRÉSTIMOS");
 		menuBar.add(mnEmprestimos);
-		
-		mntmMeusEmprestimos = new JMenuItem("Meus Emprestimos");
+
+		mntmMeusEmprestimos = new JMenuItem("Meus Empréstimos");
 		mntmMeusEmprestimos.addActionListener(new ActionListener() {
-			
 
 			public void actionPerformed(ActionEvent e) {
 				painelMeusEmprestimos = new PainelMeusEmprestimos();
-				setContentPane (painelMeusEmprestimos);
+				setContentPane(painelMeusEmprestimos);
 				revalidate();
 			}
 		});
 		mnEmprestimos.add(mntmMeusEmprestimos);
-		
-		mntmConsultarEmprestimo = new JMenuItem("Consultar Emprestimo");
+
+		mntmConsultarEmprestimo = new JMenuItem("Consultar Empréstimo");
 		mntmConsultarEmprestimo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				painelEmprestimoConsultar = new PainelEmprestimoConsultar();
@@ -141,12 +164,12 @@ public class MenuPrincipal extends JFrame {
 			}
 		});
 		mnEmprestimos.add(mntmConsultarEmprestimo);
-		
+
 		mnConsultas = new JMenu("CONSULTAS");
 		menuBar.add(mnConsultas);
-		
+
 		mntmConsultar = new JMenuItem("CONSULTAR");
-		mntmConsultar.addActionListener(new ActionListener() {			
+		mntmConsultar.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				painelConsultar = new PainelConsultar();
@@ -155,13 +178,12 @@ public class MenuPrincipal extends JFrame {
 			}
 		});
 		mnConsultas.add(mntmConsultar);
-		
-		mnRelatorios = new JMenu("RELATORIOS");		
+
+		mnRelatorios = new JMenu("RELATÓRIOS");
 		menuBar.add(mnRelatorios);
-		
-		mntmRelatorioLivrosCadastrados = new JMenuItem("Relatorio de Livros Cadastrados");
+
+		mntmRelatorioLivrosCadastrados = new JMenuItem("Relatório de Livros Cadastrados");
 		mntmRelatorioLivrosCadastrados.addActionListener(new ActionListener() {
-			
 
 			public void actionPerformed(ActionEvent e) {
 				painelRelatorioLivrosCadastrados = new PainelRelatorioLivrosCadastrados();
@@ -170,10 +192,9 @@ public class MenuPrincipal extends JFrame {
 			}
 		});
 		mnRelatorios.add(mntmRelatorioLivrosCadastrados);
-		
-		mntmRelatorioLivrosPorAutor = new JMenuItem("Relatorio de Livros por Autor");
+
+		mntmRelatorioLivrosPorAutor = new JMenuItem("Relatório de Livros por Autor");
 		mntmRelatorioLivrosPorAutor.addActionListener(new ActionListener() {
-			
 
 			public void actionPerformed(ActionEvent e) {
 				painelRelatorioLivrosAutor = new PainelRelatorioLivrosAutor();
@@ -182,10 +203,9 @@ public class MenuPrincipal extends JFrame {
 			}
 		});
 		mnRelatorios.add(mntmRelatorioLivrosPorAutor);
-		
-		mntmRelatorioLivrosPorGenero = new JMenuItem("Relatorio de Livros por Genero");
+
+		mntmRelatorioLivrosPorGenero = new JMenuItem("Relatório de Livros por Gênero");
 		mntmRelatorioLivrosPorGenero.addActionListener(new ActionListener() {
-			
 
 			public void actionPerformed(ActionEvent e) {
 				painelRelatorioLivrosGenero = new PainelRelatorioLivrosGenero();
@@ -194,9 +214,9 @@ public class MenuPrincipal extends JFrame {
 			}
 		});
 		mnRelatorios.add(mntmRelatorioLivrosPorGenero);
-		
-		mntmRelatorioLivrosPorEditora = new JMenuItem("Relatorio de Livros por Editora");
-		mntmRelatorioLivrosPorEditora.addActionListener(new ActionListener() {			
+
+		mntmRelatorioLivrosPorEditora = new JMenuItem("Relatório de Livros por Editora");
+		mntmRelatorioLivrosPorEditora.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				painelRelatorioLivrosEditora = new PainelRelatorioLivrosEditora();
@@ -204,10 +224,10 @@ public class MenuPrincipal extends JFrame {
 			}
 		});
 		mnRelatorios.add(mntmRelatorioLivrosPorEditora);
-		
+
 		mntmRelatorioDeUsuarios = new JMenuItem("Relat\u00F3rio de Usu\u00E1rios");
-		mntmRelatorioDeUsuarios.addActionListener(new ActionListener() {	
-			
+		mntmRelatorioDeUsuarios.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
 				painelRelatorioUsuarios = new PainelRelatorioUsuarios();
 				setContentPane(painelRelatorioUsuarios);
@@ -215,21 +235,21 @@ public class MenuPrincipal extends JFrame {
 			}
 		});
 		mnRelatorios.add(mntmRelatorioDeUsuarios);
-		
+
 		mnSair = new JMenu("SAIR");
 		menuBar.add(mnSair);
-		
+
 		mntmSobreSistema = new JMenuItem("Sobre o Sistema");
-		mntmSobreSistema.addActionListener(new ActionListener() {			
+		mntmSobreSistema.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				painelSobreSistema = new PainelSobreSistema();
 				setContentPane(painelSobreSistema);
-				revalidate();				
+				revalidate();
 			}
 		});
 		mnSair.add(mntmSobreSistema);
-		
+
 		mntmSair = new JMenuItem("Sair");
 		mntmSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -240,10 +260,15 @@ public class MenuPrincipal extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(128, 64, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		
+
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		//TODO verificar as permissoes do usuario autenticado e mostrar / esconder os componenetes
+
+		if (usuario.getTipoUsuario().toString().equalsIgnoreCase("USUARIO")) {
+			mnCadastro.hide();
+			mntmConsultarEmprestimo.hide();
+			mntmRelatorioDeUsuarios.hide();
+			mnRelatorios.hide();
+		}
 	}
 }

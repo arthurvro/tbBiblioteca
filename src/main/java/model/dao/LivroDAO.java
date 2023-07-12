@@ -21,7 +21,7 @@ public class LivroDAO {
 		
 		String sql = "INSERT INTO LIVRO (TITULO, SUBTITULO, EDITORA, ISBN, DTCADASTRO,"
 				+ " AUTOR, ANOPUBLICACAO)"
-				+ " VALUES (?, ?, ?, ?, ?, ?, ?) ";
+				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		 PreparedStatement query = Banco.getPreparedStatementWithPk(conn, sql);
 		
 		 try {
@@ -33,14 +33,15 @@ public class LivroDAO {
 				query.setObject(5, java.sql.Date.valueOf(novoLivro.getDtCadastro()));
 				query.setString(6, novoLivro.getAutor());
 				query.setObject(7, novoLivro.getAnoPublicacao());
+				query.setObject(8, novoLivro.getQtdLivros());
+				query.setObject(9, novoLivro.getQtdDisponivel());
 				
 				query.execute();
 				ResultSet resultado = query.getGeneratedKeys();
 				
 				if(resultado.next()) {
-					
+					//TODO REVISAR
 					novoLivro.setIdLivro(resultado.getInt(1));
-					
 					//novoLivro.setIdEditora(resultado.getInt(1));
 				}
 		
@@ -68,7 +69,8 @@ public class LivroDAO {
 				livros.add(livroBuscado);
 			}
 		}catch (Exception e) {
-			System.out.println("Erro ao buscar todos os Livros. \n Causa: "+e.getMessage());
+			System.out.println("Erro ao buscar todos os Livros. "
+					+ "\n Causa: "+e.getMessage());
 		}finally {
 			Banco.closePreparedStatement(query);
 			Banco.closeConnection(conn);
@@ -87,6 +89,7 @@ public class LivroDAO {
 		livroBuscado.setIsbn(resultado.getString("isbn"));
 		livroBuscado.setAutor(resultado.getString("autor"));
 		livroBuscado.setDtCadastro(resultado.getDate("dtcadastro").toLocalDate());
+		livroBuscado.setAnoPublicacao(resultado.getInt("anopublicacao"));
 		
 		int idGeneroDoLivro = resultado.getInt("idgenero");
 		GeneroDAO generoDAO = new GeneroDAO();
@@ -99,6 +102,52 @@ public class LivroDAO {
 		livroBuscado.setEditoraVO(editoraVO);		
 		
 		return livroBuscado;
+	}
+
+	public List<LivroVO> consultarLivroPorAutor(String nomeAutor) {
+		List<LivroVO> livrosBuscado = new ArrayList<LivroVO>();
+		
+		Connection conexao = Banco.getConnection();
+		
+		String sql = "SELECT * FROM LIVRO WHERE AUTOR = ? ";
+		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
+		
+		try {
+			query.setString(1, nomeAutor);
+			ResultSet resultado = query.executeQuery();
+			while(resultado.next()) {
+				LivroVO autorBuscado= converterDeResultSetParaEntidade(resultado);
+				livrosBuscado.add(autorBuscado);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Erro ao buscar livro por autor."+nomeAutor);
+			System.out.println("Causa: " +e.getMessage());
+		}finally {
+			Banco.closePreparedStatement(query);
+			Banco.closeConnection(conexao);
+		}
+		
+		return livrosBuscado;
+	}
+
+	private LivroVO converterDeResultSetParaEntidade(ResultSet resultado) throws SQLException {
+		LivroVO livrosBuscado = new LivroVO();
+		livrosBuscado.setIdLivro(resultado.getInt("idlivro"));
+		livrosBuscado.setTitulo(resultado.getString("titulo"));
+		livrosBuscado.setSubTitulo(resultado.getString("subtitulo"));
+		livrosBuscado.setIsbn(resultado.getString("isbn"));
+		livrosBuscado.setDtCadastro(resultado.getDate("dtcadastro").toLocalDate());
+		livrosBuscado.setAutor(resultado.getString("autor"));
+		livrosBuscado.setAnoPublicacao(resultado.getInt("anopublicacao"));
+		
+		int idEditoraDoLivro = resultado.getInt("ideditora");
+		EditoraDAO editoraDAO = new EditoraDAO();
+		EditoraVO editoraVO = editoraDAO.consultarPorIdEditora(idEditoraDoLivro);
+		
+		livrosBuscado.setEditoraVO(editoraVO);
+		
+		return livrosBuscado;
 	}
 
 }
